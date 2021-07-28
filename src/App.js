@@ -6,13 +6,18 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { Board } from "./Components/Board/Board";
+
 function App() {
   return (
-    <div className="App">
-      hello cards
-      <br />
-      <Joker1 />
-    </div>
+    <Router>
+      <div className="App">
+        hello cards
+        <br />
+        <Board />
+        <Joker1 />
+      </div>
+    </Router>
   );
 }
 
