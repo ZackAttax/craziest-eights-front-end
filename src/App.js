@@ -1,10 +1,12 @@
-
-import './App.css';
+import "./App.css";
+import { Joker1 } from "./cards";
 
 function App() {
   return (
     <div className="App">
-      hello world
+      hello cards
+      <br />
+      <Joker1 />
     </div>
   );
 }
