@@ -12,21 +12,22 @@ function App() {
   return (
     <Router>
       <div className="App">
-        hello cards
-        <br />
-        <Board id='board-1' className='board'>
-          <Card id="card-1" className='card' draggable='true'>
-                <p>card one</p>
-          </Card>
-        </Board>
+        <main className='flexbox'>
+          <br />
+          <Board id='board-1' className='board'>
+            <Card id="card-1" className='card' draggable='true'>
+                  <p>card one</p>
+            </Card>
+          </Board>
 
-        <Board id='board-2' className='board'>
-          <Card id="card-2" className='card' draggable='true'>
-                <p>card two</p>
-          </Card>
-        </Board>
+          <Board id='board-2' className='board'>
+            <Card id="card-2" className='card' draggable='true'>
+                  <p>card two</p>
+            </Card>
+          </Board>
 
-        <Joker1 />
+          <Joker1 />
+        </main>
       </div>
     </Router>
   );
