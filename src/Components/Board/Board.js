@@ -1,6 +1,7 @@
 import React from 'react'
+import Card from '../Card/Card'
 
-export default const Board = () =>{
+export const Board = (props) =>{
     const drop = e => {
         e.preventDefault();
         const cardId = e.dataTransfer.getData('cardId');
@@ -12,8 +13,9 @@ export default const Board = () =>{
     }
 
     const dragOver = e => {
-        e.preventDefault
+        e.preventDefault()
     }
+
     return(
 
         <div 
