@@ -39,6 +39,8 @@
     ]
   },
   "devDependencies": {
-    "@svgr/cli": "^5.5.0"
+    "@svgr/cli": "^5.5.0",
+    "eslint": "^7.31.0",
+    "eslint-plugin-react": "^7.24.0"
   }
 }
