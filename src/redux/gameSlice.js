@@ -2,14 +2,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userApi from "./userApi";
 
 const initialState = {
-  games: [],
-  game: {
-    players: {
-      id: "",
-      name: "",
-      playerCount: "0",
-      creator: "",
-    },
+  pending: {
+    games: [],
+    status: "idle",
+  },
+  current: {
+    players: [],
     cards: {
       nextStock: "",
       openCard: "",
@@ -17,13 +15,26 @@ const initialState = {
     },
     turn: {
       totalTurns: "",
-      currentUserId: "",
+      currentPlayer: "",
     },
     state: "",
   },
 };
 
-export const getGame = createAsyncThunk("games");
+export const getPendingGames = createAsyncThunk(
+  "game/getPendingGames",
+  async () => await userApi.game.index(),
+);
+
+export const getCurrentGame = createAsyncThunk(
+  "game/getCurrentGame",
+  async (id) => await userApi.game.show(id),
+);
+
+export const addPlayer = createAsyncThunk(
+  "game/addPlayer",
+  async (gameId, player) => await userApi.game.newPlayer(gameId, player),
+);
 
 const gameSlice = createSlice({
   name: "game",
@@ -33,24 +44,30 @@ const gameSlice = createSlice({
   },
   extraReducers: {
     //READ
-    [getGames.pending]: (state) => {
-      state.games = {
-        ...state.games,
-        status: "loading",
+    [getPendingGames.pending]: (state) => {
+      state.game = {
+        ...state.game,
+        pending: {
+          status: "loading",
+        },
       };
     },
-    [getGames.fulfilled]: (state, action) => {
-      state.games = {
-        ...state.games,
-        status: "finished",
-        data: action.payload,
+    [getPendingGames.fulfilled]: (state, action) => {
+      state.game = {
+        ...state.game,
+        pending: {
+          status: "finished",
+          games: action.payload,
+        },
       };
     },
-    [getGames.rejected]: (state, action) => {
-      state.games = {
-        ...state.games,
-        status: "failed",
-        error: action.payload,
+    [getPendingGames.rejected]: (state, action) => {
+      state.game = {
+        ...state.game,
+        pending: {
+          status: "failed",
+          error: action.payload,
+        },
       };
     },
   },
