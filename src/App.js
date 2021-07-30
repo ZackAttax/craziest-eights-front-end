@@ -4,7 +4,7 @@ import { Joker1 } from "./cards";
 import { BrowserRouter as Router } from "react-router-dom";
 import Board from "./Components/Board/Board";
 import Card from "./Components/Card/Card";
-function App() {
+const App = () => {
   return (
     <Router>
       <div className="App">
@@ -27,6 +27,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;
