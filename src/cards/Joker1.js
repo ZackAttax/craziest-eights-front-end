@@ -4,8 +4,7 @@ function SvgJoker1(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={238.11}
-      height={332.597}
+      viewBox="0 0 238.11 332.597"
       {...props}
     >
       <path

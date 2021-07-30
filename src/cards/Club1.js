@@ -4,8 +4,7 @@ function SvgClub1(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      height={332.599}
-      width={238.111}
+      viewBox="0 0 238.111 332.599"
       {...props}
     >
       <g transform="matrix(1.07145 0 0 1.07009 -496.653 1164.653)">

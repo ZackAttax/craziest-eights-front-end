@@ -4,8 +4,7 @@ function SvgDiamond10(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={238.111}
-      height={332.599}
+      viewBox="0 0 238.111 332.599"
       {...props}
     >
       <rect

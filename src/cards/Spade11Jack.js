@@ -4,8 +4,7 @@ function SvgSpade11Jack(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={238.111}
-      height={332.599}
+      viewBox="0 0 238.111 332.599"
       {...props}
     >
       <g transform="matrix(1.07145 0 0 1.07009 -3327.693 409.581)">

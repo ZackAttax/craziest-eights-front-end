@@ -4,8 +4,7 @@ function SvgDiamond3(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={238.111}
-      height={332.599}
+      viewBox="0 0 238.111 332.599"
       {...props}
     >
       <g transform="translate(-1057.588 32.475) scale(1.06667)">
