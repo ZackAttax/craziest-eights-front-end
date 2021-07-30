@@ -7,17 +7,21 @@ const initialState = {
     status: "idle",
   },
   current: {
-    players: [],
-    cards: {
-      nextStock: "",
-      openCard: "",
-      playerCardCounts: "",
+    game: {
+      id: null,
+      name: "",
+      turn: null,
+      state: null,
+      turn_player_id: null,
+      winner: null,
+      open_card: {},
+      players: [],
     },
-    turn: {
-      totalTurns: "",
-      currentPlayer: "",
-    },
-    state: "",
+    status: "idle",
+  },
+  client: {
+    player_id: null,
+    game_id: null,
   },
 };
 
@@ -31,9 +35,40 @@ export const getCurrentGame = createAsyncThunk(
   async (id) => await userApi.game.show(id),
 );
 
-export const addPlayer = createAsyncThunk(
-  "game/addPlayer",
-  async (gameId, player) => await userApi.game.newPlayer(gameId, player),
+export const newGame = createAsyncThunk(
+  "game/newGame",
+  async (name, playerName) => await userApi.game.create(name, playerName),
+);
+
+export const joinGame = createAsyncThunk(
+  "game/joinGame",
+  async (gameId, playerName) => {
+    let player = { name: playerName, is_ai: false };
+    return await userApi.game.newPlayer(gameId, player);
+  },
+);
+
+export const addAIPlayer = createAsyncThunk(
+  "game/addAIPlayer",
+  async (gameId, playerName) => {
+    let player = { name: playerName, is_ai: true };
+    return await userApi.game.newPlayer(gameId, player);
+  },
+);
+
+export const startGame = createAsyncThunk(
+  "game/startGame",
+  async (gameId) => await userApi.game.start(gameId),
+);
+
+export const finishGame = createAsyncThunk(
+  "game/finishGame",
+  async (gameId) => await userApi.game.finish(gameId),
+);
+
+export const deleteGame = createAsyncThunk(
+  "game/finishGame",
+  async (gameId) => await userApi.game.destroy(gameId),
 );
 
 const gameSlice = createSlice({
@@ -43,11 +78,12 @@ const gameSlice = createSlice({
     // non async logic goes here
   },
   extraReducers: {
-    //READ
+    // index pending games
     [getPendingGames.pending]: (state) => {
       state.game = {
         ...state.game,
         pending: {
+          ...state.pending,
           status: "loading",
         },
       };
@@ -56,8 +92,8 @@ const gameSlice = createSlice({
       state.game = {
         ...state.game,
         pending: {
-          status: "finished",
           games: action.payload,
+          status: "finished",
         },
       };
     },
@@ -67,6 +103,68 @@ const gameSlice = createSlice({
         pending: {
           status: "failed",
           error: action.payload,
+        },
+      };
+    },
+
+    // get state of current game
+    [getCurrentGame.pending]: (state) => {
+      state.game = {
+        ...state.game,
+        current: {
+          ...state.game.current,
+          status: "loading",
+        },
+      };
+    },
+    [getCurrentGame.fulfilled]: (state, action) => {
+      state.game = {
+        ...state.game,
+        current: {
+          game: action.payload,
+          status: "finished",
+        },
+      };
+    },
+    [getCurrentGame.rejected]: (state, action) => {
+      state.game = {
+        ...state.game,
+        current: {
+          error: action.payload,
+          status: "failed",
+        },
+      };
+    },
+
+    // new game
+    [newGame.pending]: (state) => {
+      state.game = {
+        ...state.game,
+        current: {
+          ...state.game.current,
+          status: "loading",
+        },
+      };
+    },
+    [newGame.fulfilled]: (state, action) => {
+      state.game = {
+        ...state.game,
+        current: {
+          game: action.payload,
+          status: "finished",
+        },
+        client: {
+          player_id: action.payload.players[0].id,
+          game_id: action.payload.id,
+        },
+      };
+    },
+    [newGame.rejected]: (state, action) => {
+      state.game = {
+        ...state.game,
+        current: {
+          error: action.payload,
+          status: "failed",
         },
       };
     },
