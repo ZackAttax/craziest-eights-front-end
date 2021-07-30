@@ -1,7 +1,11 @@
 import React from 'react'
-import Card from '../Card/Card'
 
 export const Board = (props) =>{
+    Board.propTypes = {
+        id: "",
+        className: "",
+        children: {}
+    }
     const drop = e => {
         e.preventDefault();
         const cardId = e.dataTransfer.getData('cardId');
@@ -27,4 +31,5 @@ export const Board = (props) =>{
         {props.children}
     </div>
     )
+   
 }

@@ -1,11 +1,7 @@
 import "./App.css";
+import React from "react";
 import { Joker1 } from "./cards";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { Board } from "./Components/Board/Board";
 import Card from "./Components/Card/Card";
 function App() {
