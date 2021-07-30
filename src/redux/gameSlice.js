@@ -67,7 +67,7 @@ export const finishGame = createAsyncThunk(
 );
 
 export const deleteGame = createAsyncThunk(
-  "game/finishGame",
+  "game/deleteGame",
   async (gameId) => await userApi.game.destroy(gameId),
 );
 
@@ -165,6 +165,164 @@ const gameSlice = createSlice({
         current: {
           error: action.payload,
           status: "failed",
+        },
+      };
+    },
+
+    // join game
+    [joinGame.pending]: (state) => {
+      state.game = {
+        ...state.game,
+        current: {
+          ...state.game.current,
+          status: "loading",
+        },
+      };
+    },
+    [joinGame.fulfilled]: (state, action) => {
+      state.game = {
+        ...state.game,
+        current: {
+          game: action.payload,
+          status: "finished",
+        },
+        client: {
+          player_id: action.payload.players[0].id,
+          game_id: action.payload.id,
+        },
+      };
+    },
+    [joinGame.rejected]: (state, action) => {
+      state.game = {
+        ...state.game,
+        current: {
+          error: action.payload,
+          status: "failed",
+        },
+      };
+    },
+
+    // add AI player
+    [addAIPlayer.pending]: (state) => {
+      state.game = {
+        ...state.game,
+        current: {
+          ...state.game.current,
+          status: "loading",
+        },
+      };
+    },
+    [addAIPlayer.fulfilled]: (state, action) => {
+      state.game = {
+        ...state.game,
+        current: {
+          game: action.payload,
+          status: "finished",
+        },
+      };
+    },
+    [addAIPlayer.rejected]: (state, action) => {
+      state.game = {
+        ...state.game,
+        current: {
+          ...state.game.current,
+          error: action.payload,
+          status: "failed",
+        },
+      };
+    },
+
+    // start game
+    [startGame.pending]: (state) => {
+      state.game = {
+        ...state.game,
+        current: {
+          ...state.game.current,
+          status: "loading",
+        },
+      };
+    },
+    [startGame.fulfilled]: (state, action) => {
+      state.game = {
+        ...state.game,
+        current: {
+          game: action.payload,
+          status: "finished",
+        },
+      };
+    },
+    [startGame.rejected]: (state, action) => {
+      state.game = {
+        ...state.game,
+        current: {
+          ...state.game.current,
+          error: action.payload,
+          status: "failed",
+        },
+      };
+    },
+
+    // finish game
+    [finishGame.pending]: (state) => {
+      state.game = {
+        ...state.game,
+        current: {
+          ...state.game.current,
+          status: "loading",
+        },
+      };
+    },
+    [finishGame.fulfilled]: (state, action) => {
+      state.game = {
+        ...state.game,
+        current: {
+          game: action.payload,
+          status: "finished",
+        },
+      };
+    },
+    [finishGame.rejected]: (state, action) => {
+      state.game = {
+        ...state.game,
+        current: {
+          ...state.game.current,
+          error: action.payload,
+          status: "failed",
+        },
+      };
+    },
+
+    // delete game
+    [deleteGame.pending]: (state) => {
+      state.game = {
+        ...state.game,
+        current: {
+          ...state.game.current,
+          status: "loading",
+        },
+      };
+    },
+    [deleteGame.fulfilled]: (state) => {
+      state.game = {
+        ...state.game,
+        current: {
+          ...initialState.current,
+        },
+        client: {
+          ...initialState.client,
+        },
+      };
+    },
+    // if delete fails, game state is still cleared in client
+    [deleteGame.rejected]: (state, action) => {
+      state.game = {
+        ...state.game,
+        current: {
+          ...initialState.current,
+          error: action.payload,
+        },
+        client: {
+          ...initialState.client,
         },
       };
     },
