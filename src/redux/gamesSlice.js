@@ -36,8 +36,7 @@ const gamesSlice = createSlice({
         //READ
       getGames: (state, action) => {
         state.games = {
-          ...state.games,
-        };
+          ...state.games, action };
       },
     }
 })

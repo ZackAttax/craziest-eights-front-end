@@ -1,4 +1,5 @@
 import "./App.css";
+import React from "react";
 import { Joker1 } from "./cards";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Board } from "./Components/Board/Board";

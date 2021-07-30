@@ -1,6 +1,12 @@
 import React from 'react'
 
 export default function Card(props) {
+    Card.propTypes = {
+        id: "",
+        className: "",
+        draggable: "",
+        children: {}
+    }
     const dragStart = e => {
         const target = e.target;
         e.dataTransfer.setData('cardId', target.id)
