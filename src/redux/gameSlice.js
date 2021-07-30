@@ -9,7 +9,7 @@ const initialState = {
   current: {
     game: {
       id: null,
-      name: "",
+      name: null,
       turn: null,
       state: null,
       turn_player_id: null,
