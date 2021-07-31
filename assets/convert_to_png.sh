@@ -1,3 +1,4 @@
+# /bin/bash
 inkscape -w 252 -h 352 cards/CLUB-10.svg -o cards_png/C10.png
 inkscape -w 252 -h 352 cards/CLUB-11-JACK.svg -o cards_png/CJ.png
 inkscape -w 252 -h 352 cards/CLUB-12-QUEEN.svg -o cards_png/CQ.png
