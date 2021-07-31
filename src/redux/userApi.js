@@ -14,19 +14,16 @@ const postOpts = {
 
 const userApi = {
   game: {
-    index: () => {
+    index: () =>
       fetch(`${ROOT_URL}/games`, {
         ...jsonHeaders,
-      }).then((response) => response.json());
-    },
+      }).then((response) => response.json()),
 
-    show: (game) => {
+    show: (game) =>
       fetch(`${ROOT_URL}/games/${game}`, {
         ...jsonHeaders,
-      }).then((response) => response.json());
-    },
-
-    create: (name, playerName) => {
+      }).then((response) => response.json()),
+    create: (name, playerName) =>
       fetch(`${ROOT_URL}/games`, {
         ...postOpts,
         body: JSON.stringify({
@@ -38,59 +35,45 @@ const userApi = {
             is_ai: false,
           },
         }),
-      });
-    },
-
+      }),
     // player obj: player: {name: string, is_ai: boolean}
-    newPlayer: (game, player) => {
+    newPlayer: (game, player) =>
       fetch(`${ROOT_URL}/games/${game}/new_player`, {
         ...postOpts,
         body: JSON.stringify({ player: player }),
-      }).then((response) => response.json());
-    },
-
-    start: (game) => {
+      }).then((response) => response.json()),
+    start: (game) =>
       fetch(`${ROOT_URL}/games/${game}/start`, {
         ...postOpts,
         body: JSON.stringify({}),
-      }).then((response) => response.json());
-    },
-
-    finish: (game) => {
+      }).then((response) => response.json()),
+    finish: (game) =>
       fetch(`${ROOT_URL}/games/${game}/finish`, {
         ...postOpts,
         body: JSON.stringify({}),
-      }).then((response) => response.json());
-    },
-
-    destroy: (game) => {
+      }).then((response) => response.json()),
+    destroy: (game) =>
       fetch(`${ROOT_URL}/games/${game}`, {
         ...jsonHeaders,
         method: "DELETE",
-      }).then((response) => response.json());
-    },
+      }).then((response) => response.json()),
   },
 
   player: {
-    show: (player) => {
+    show: (player) =>
       fetch(`${ROOT_URL}/players/${player}`, {
         ...jsonHeaders,
-      }).then((response) => response.json());
-    },
-
-    drawCard: (player) => {
+      }).then((response) => response.json()),
+    drawCard: (player) =>
       fetch(`${ROOT_URL}/players/${player}/draw`, {
         ...postOpts,
         body: JSON.stringify({}),
-      }).then((response) => response.json());
-    },
-
-    playCard: (player, card) => {
+      }).then((response) => response.json()),
+    playCard: (player, card) =>
       fetch(`${ROOT_URL}/players/${player}/play`, {
         ...postOpts,
         body: JSON.stringify({ card: card }),
-      }).then((response) => response.json());
-    },
+      }).then((response) => response.json()),
   },
 };
 
