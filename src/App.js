@@ -45,6 +45,7 @@ const App = () => {
               draggable="true"
               suit="C"
               rank="2"
+              scalePct="50%"
             ></Card>
           </Board>
 
@@ -54,6 +55,7 @@ const App = () => {
               className="card"
               draggable="true"
               specialCard="back"
+              scalePct="25%"
             >
               <p>card two</p>
             </Card>

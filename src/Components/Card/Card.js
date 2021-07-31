@@ -11,11 +11,11 @@ const Card = (props) => {
   };
 
   const imageURL = () => {
-    const baseURL = "../../../assets/cards_png/";
-    if (props.rank != "" && props.suit != "") {
+    const baseURL = "cards/";
+    if (props.rank && props.suit) {
       console.log(`${baseURL}${props.suit}${props.rank}.png`);
       return `${baseURL}${props.suit}${props.rank}.png`;
-    } else if (props.specialCard != "") {
+    } else if (props.specialCard) {
       console.log(`${baseURL}${props.specialCard}.png`);
       return `${baseURL}${props.specialCard}.png`;
     }
@@ -34,10 +34,11 @@ const Card = (props) => {
       onDragOver={dragOver}
     >
       <img
-        src={imageURL}
+        src={imageURL()}
         alt={
           props.specialCard ? props.specialCard : `${props.rank}${props.suit}`
         }
+        style={{ width: props.scalePct }}
       />
       {props.children}
     </div>
@@ -49,8 +50,7 @@ Card.propTypes = {
   className: PropTypes.any,
   draggable: PropTypes.any,
   children: PropTypes.any,
-  height: PropTypes.any,
-  width: PropTypes.any,
+  scalePct: PropTypes.string,
   suit: PropTypes.string,
   rank: PropTypes.string,
   specialCard: PropTypes.string,
