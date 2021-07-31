@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Board from "./Components/Board/Board";
 import Card from "./Components/Card/Card";
-import CardFace from "./Components/Card/CardFace";
 import Navbar from "./Components/Navbar/Navbar";
 //import { useDispatch } from "react-redux";
 
@@ -40,9 +39,7 @@ const App = () => {
         <main className="flexbox">
           <br />
           <Board id="board-1" className="board">
-            <Card id="card-1" className="card" draggable="true">
-              <CardFace />
-            </Card>
+            <Card id="card-1" className="card" draggable="true"></Card>
           </Board>
 
           <Board id="board-2" className="board">
