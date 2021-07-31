@@ -28,12 +28,12 @@ const NewGame = () => {
       >
         <Heading>put a form to create a new game here</Heading>
         <TextInput
-          placeholder="Game Name"
+          placeholder="Player Name"
           onChange={(e) => setPlayerName(e.target.value)}
           value={playerName}
         />
         <TextInput
-          placeholder="Player Name"
+          placeholder="Game Name"
           onChange={(e) => setGameName(e.target.value)}
           value={gameName}
         />

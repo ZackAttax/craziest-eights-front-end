@@ -33,8 +33,10 @@ const GameLobby = () => {
     <Pane
       width="100%"
       display="flex"
-      justifyContent="center"
-      flex-flow="column"
+      justifyContent="space-evenly"
+      alignItems="center"
+      flex="auto"
+      flexDirection="column"
       padding={50}
     >
       <Heading size={900}>Open Games</Heading>
