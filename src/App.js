@@ -1,6 +1,5 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-//import { BrowserRouter as Router } from "react-router-dom";
 //import Board from "./Components/Board/Board";
 //import Card from "./Components/Card/Card";
 import Navbar from "./Components/Navbar/Navbar";
