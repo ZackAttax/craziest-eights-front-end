@@ -83,7 +83,6 @@ const gameSlice = createSlice({
       state.game = {
         ...state.game,
         pending: {
-          ...state.pending,
           status: "loading",
         },
       };
