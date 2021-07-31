@@ -45,14 +45,17 @@ const CardFace = (props) => {
     return Faces[componentName];
   };
 
-  const CardComponent = React.createElement(determineFace(), {
-    height: props.height,
-    width: props.width,
-  });
+  //const CardComponent = React.createElement(`${determineFace()}`, {
+  //height: props.height,
+  //width: props.width,
+  //});
 
   return (
     <div>
-      <CardComponent />
+      {React.createElement(`${determineFace()}`, {
+        height: props.height,
+        width: props.width,
+      })}
     </div>
   );
 };
@@ -63,6 +66,7 @@ CardFace.propTypes = {
   height: PropTypes.any,
   width: PropTypes.any,
   preserveAspectRatio: PropTypes.string,
+  viewHeight: PropTypes.any,
 };
 
 CardFace.defaultProps = {
