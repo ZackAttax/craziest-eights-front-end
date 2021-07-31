@@ -42,7 +42,7 @@ const CardFace = (props) => {
         componentName += "Back";
         break;
     }
-    return componentName;
+    return Faces[componentName];
   };
 
   const CardComponent = React.createElement(determineFace(), {
