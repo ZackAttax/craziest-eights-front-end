@@ -1,58 +1,74 @@
-import {
-  Back,
-  Club1,
-  Club10,
-  Club11Jack,
-  Club12Queen,
-  Club13King,
-  Club2,
-  Club3,
-  Club4,
-  Club5,
-  Club6,
-  Club7,
-  Club8,
-  Club9,
-  Diamond1,
-  Diamond10,
-  Diamond11Jack,
-  Diamond12Queen,
-  Diamond13King,
-  Diamond2,
-  Diamond3,
-  Diamond4,
-  Diamond5,
-  Diamond6,
-  Diamond7,
-  Diamond8,
-  Diamond9,
-  Heart1,
-  Heart10,
-  Heart11Jack,
-  Heart12Queen,
-  Heart13King,
-  Heart2,
-  Heart3,
-  Heart4,
-  Heart5,
-  Heart6,
-  Heart7,
-  Heart8,
-  Heart9,
-  Joker1,
-  Joker2,
-  Joker3,
-  Spade1,
-  Spade10,
-  Spade11Jack,
-  Spade12Queen,
-  Spade13King,
-  Spade2,
-  Spade3,
-  Spade4,
-  Spade5,
-  Spade6,
-  Spade7,
-  Spade8,
-  Spade9,
-} from "./CardFaces";
+import React from "react";
+import PropTypes from "prop-types";
+import * as Faces from "./CardFaces";
+
+const CardFace = (props) => {
+  const determineFace = () => {
+    let componentName = "";
+    const numberCard = props.rank > 1 && props.rank < 11;
+    switch (props.suit) {
+      case "S":
+        componentName += "Spade";
+        break;
+      case "C":
+        componentName += "Club";
+        break;
+      case "D":
+        componentName += "Diamond";
+        break;
+      case "H":
+        componentName += "Heart";
+        break;
+      default:
+        null;
+    }
+    switch (props.rank) {
+      case "A":
+        componentName += "1";
+        break;
+      case "K":
+        componentName += "13King";
+        break;
+      case "Q":
+        componentName += "13King";
+        break;
+      case "J":
+        componentName += "13King";
+        break;
+      case numberCard:
+        componentName += props.rank;
+        break;
+      default:
+        componentName += "Back";
+        break;
+    }
+    return componentName;
+  };
+
+  const CardComponent = React.createElement(determineFace(), {
+    height: props.height,
+    width: props.width,
+  });
+
+  return (
+    <div>
+      <CardComponent />
+    </div>
+  );
+};
+
+CardFace.propTypes = {
+  rank: PropTypes.string,
+  suit: PropTypes.string,
+  height: PropTypes.any,
+  width: PropTypes.any,
+  preserveAspectRatio: PropTypes.string,
+};
+
+CardFace.defaultProps = {
+  height: "100%",
+  preserveAspectRatio: "xMinYMin slice",
+  width: "100%",
+};
+
+export default CardFace;
