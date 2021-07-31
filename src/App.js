@@ -1,10 +1,13 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import Board from "./Components/Board/Board";
-import Card from "./Components/Card/Card";
+import React, { useState, useEffect } from "react";
+//import { BrowserRouter as Router } from "react-router-dom";
+//import Board from "./Components/Board/Board";
+//import Card from "./Components/Card/Card";
 import Navbar from "./Components/Navbar/Navbar";
+import GameLobby from "./Components/Lobby/GameLobby";
 //import { useDispatch } from "react-redux";
+import craziestTheme from "./craziestTheme";
+import { ThemeProvider } from "evergreen-ui";
 
 const App = () => {
   useEffect(() => {
@@ -33,36 +36,38 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <div className="App">
-        <Navbar newVisit={newVisit} />
-        <main className="flexbox">
-          <br />
-          <Board id="board-1" className="board">
-            <Card
-              id="card-1"
-              className="card"
-              draggable="true"
-              suit="C"
-              rank="2"
-              scalePct="50%"
-            ></Card>
-          </Board>
+    <ThemeProvider value={craziestTheme}>
+      <Navbar newVisit={newVisit} />
+      {newVisit ? <GameLobby /> : <div>game board</div>}
+    </ThemeProvider>
 
-          <Board id="board-2" className="board">
-            <Card
-              id="card-2"
-              className="card"
-              draggable="true"
-              specialCard="back"
-              scalePct="25%"
-            >
-              <p>card two</p>
-            </Card>
-          </Board>
-        </main>
-      </div>
-    </Router>
+    //<Router>
+    //<div className="App">
+    //<main className="flexbox">
+    //<br />
+    //<Board id="board-1" className="board">
+    //<Card
+    //id="card-1"
+    //className="card"
+    //draggable="true"
+    //suit="C"
+    //rank="2"
+    //scalePct="50%"
+    //></Card>
+    //</Board>
+
+    //<Board id="board-2" className="board">
+    //<Card
+    //id="card-2"
+    //className="card"
+    //draggable="true"
+    //specialCard="back"
+    //scalePct="25%"
+    //></Card>
+    //</Board>
+    //</main>
+    //</div>
+    //</Router>
   );
 };
 
