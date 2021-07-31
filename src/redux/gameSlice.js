@@ -2,26 +2,28 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userApi from "./userApi";
 
 const initialState = {
-  pending: {
-    games: [],
-    status: "idle",
-  },
-  current: {
-    game: {
-      id: null,
-      name: null,
-      turn: null,
-      state: null,
-      turn_player_id: null,
-      winner: null,
-      open_card: {},
-      players: [],
+  game: {
+    pending: {
+      games: [],
+      status: "idle",
     },
-    status: "idle",
-  },
-  client: {
-    player_id: null,
-    game_id: null,
+    current: {
+      game: {
+        id: null,
+        name: null,
+        turn: null,
+        state: null,
+        turn_player_id: null,
+        winner: null,
+        open_card: {},
+        players: [],
+      },
+      status: "idle",
+    },
+    client: {
+      player_id: null,
+      game_id: null,
+    },
   },
 };
 

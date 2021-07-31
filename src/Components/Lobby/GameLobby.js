@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Pane, Heading } from "evergreen-ui";
 import { useDispatch, useSelector } from "react-redux";
 import { getPendingGames } from "../../redux/gameSlice";
+import GameEntry from "./GameEntry";
 
 const GameLobby = () => {
   const dispatch = useDispatch();
@@ -13,14 +14,16 @@ const GameLobby = () => {
 
   const {
     game: {
-      pending: { games, status },
+      game: {
+        pending: { games, status },
+      },
     },
   } = useSelector((state) => state);
 
   const showGames = () => {
     if (status == "finished") {
-      games.map((game) => {
-        return <li key={game.id}>{game.name}</li>;
+      return games.map((game) => {
+        return <GameEntry key={game.id} game={game} />;
       });
     }
   };
@@ -34,7 +37,7 @@ const GameLobby = () => {
       padding-top={50}
     >
       <Heading size={900}>Open Games</Heading>
-      <ul>{showGames()}</ul>
+      <Pane>{showGames()}</Pane>
     </Pane>
   );
 };

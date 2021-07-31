@@ -2,14 +2,16 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userApi from "./userApi";
 
 const initialState = {
-  current: {
-    id: null,
-    name: null,
-    is_ai: false,
-    game_id: null,
-    hand: [],
+  player: {
+    current: {
+      id: null,
+      name: null,
+      is_ai: false,
+      game_id: null,
+      hand: [],
+    },
+    status: "idle",
   },
-  status: "idle",
 };
 
 export const getPlayerInfo = createAsyncThunk(
