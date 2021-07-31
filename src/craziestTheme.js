@@ -5,6 +5,7 @@ const craziestTheme = {
   fontFamilies: {
     ...defaultTheme.fontFamilies,
     display: "Merriweather, serif",
+    ui: "ABeeZee, sans-serif",
   },
 };
 
