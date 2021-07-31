@@ -39,11 +39,22 @@ const App = () => {
         <main className="flexbox">
           <br />
           <Board id="board-1" className="board">
-            <Card id="card-1" className="card" draggable="true"></Card>
+            <Card
+              id="card-1"
+              className="card"
+              draggable="true"
+              suit="C"
+              rank="2"
+            ></Card>
           </Board>
 
           <Board id="board-2" className="board">
-            <Card id="card-2" className="card" draggable="true">
+            <Card
+              id="card-2"
+              className="card"
+              draggable="true"
+              specialCard="back"
+            >
               <p>card two</p>
             </Card>
           </Board>

@@ -10,6 +10,17 @@ const Card = (props) => {
     }, 0);
   };
 
+  const imageURL = () => {
+    const baseURL = "../../../assets/cards_png/";
+    if (props.rank != "" && props.suit != "") {
+      console.log(`${baseURL}${props.suit}${props.rank}.png`);
+      return `${baseURL}${props.suit}${props.rank}.png`;
+    } else if (props.specialCard != "") {
+      console.log(`${baseURL}${props.specialCard}.png`);
+      return `${baseURL}${props.specialCard}.png`;
+    }
+  };
+
   const dragOver = (e) => {
     e.stopPropagation();
   };
@@ -22,6 +33,13 @@ const Card = (props) => {
       onDragStart={dragStart}
       onDragOver={dragOver}
     >
+      <img
+        src={imageURL}
+        alt={
+          props.specialCard ? props.specialCard : `${props.rank}${props.suit}`
+        }
+      />
+      {props.children}
     </div>
   );
 };
@@ -31,6 +49,11 @@ Card.propTypes = {
   className: PropTypes.any,
   draggable: PropTypes.any,
   children: PropTypes.any,
+  height: PropTypes.any,
+  width: PropTypes.any,
+  suit: PropTypes.string,
+  rank: PropTypes.string,
+  specialCard: PropTypes.string,
 };
 
 export default Card;
