@@ -151,12 +151,12 @@ const gameSlice = createSlice({
       state.game = {
         ...state.game,
         current: {
-          game: action.payload.json(),
+          game: action.payload,
           status: "finished",
         },
         client: {
-          player_id: null,
-          game_id: null,
+          player_id: action.payload.players[0].id,
+          game_id: action.payload.id,
         },
       };
     },

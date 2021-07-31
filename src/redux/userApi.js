@@ -35,7 +35,7 @@ const userApi = {
             is_ai: false,
           },
         }),
-      }),
+      }).then((response) => response.json()),
     // player obj: player: {name: string, is_ai: boolean}
     newPlayer: (game, player) =>
       fetch(`${ROOT_URL}/games/${game}/new_player`, {
