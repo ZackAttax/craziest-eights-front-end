@@ -3,6 +3,7 @@ import { Pane, Heading } from "evergreen-ui";
 import { useDispatch, useSelector } from "react-redux";
 import { getPendingGames } from "../../redux/gameSlice";
 import GameEntry from "./GameEntry";
+import NewGame from "./NewGame";
 
 const GameLobby = () => {
   const dispatch = useDispatch();
@@ -31,13 +32,16 @@ const GameLobby = () => {
   return (
     <Pane
       width="100%"
-      height="70vw"
       display="flex"
       justifyContent="center"
-      padding-top={50}
+      flex-flow="column"
+      padding={50}
     >
       <Heading size={900}>Open Games</Heading>
       <Pane>{showGames()}</Pane>
+      <Pane>
+        <NewGame />
+      </Pane>
     </Pane>
   );
 };
