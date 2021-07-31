@@ -1,15 +1,17 @@
 import "./App.css";
-import React, { useEffect } from "react";
-import { Joker1 } from "./Components/Card/CardFaces";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Board from "./Components/Board/Board";
 import Card from "./Components/Card/Card";
-import { useDispatch } from "react-redux";
+import Navbar from "./Components/Navbar/Navbar";
+//import { useDispatch } from "react-redux";
 
 const App = () => {
   useEffect(() => {
     handleLoad();
   }, []);
+
+  const [newVisit, setNewVisit] = useState(false);
 
   const handleLoad = () => {
     // check localStorage for existing game and player ids, use to determine which component to load
@@ -23,14 +25,17 @@ const App = () => {
       // if game and player exist
       // render game board
       // this might be its own function
+      setNewVisit(false);
     } else {
       // render game list with about modal on
+      setNewVisit(true);
     }
   };
 
   return (
     <Router>
       <div className="App">
+        <Navbar newVisit={newVisit} />
         <main className="flexbox">
           <br />
           <Board id="board-1" className="board">
@@ -44,8 +49,6 @@ const App = () => {
               <p>card two</p>
             </Card>
           </Board>
-
-          <Joker1 />
         </main>
       </div>
     </Router>
