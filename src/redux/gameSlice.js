@@ -2,26 +2,29 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userApi from "./userApi";
 
 const initialState = {
-  pending: {
-    games: [],
-    status: "idle",
-  },
-  current: {
-    game: {
-      id: null,
-      name: null,
-      turn: null,
-      state: null,
-      turn_player_id: null,
-      winner: null,
-      open_card: {},
-      players: [],
+  game: {
+    pending: {
+      games: [],
+      status: "idle",
     },
-    status: "idle",
-  },
-  client: {
-    player_id: null,
-    game_id: null,
+    current: {
+      game: {
+        id: null,
+        name: null,
+        turn: null,
+        state: null,
+        turn_player_id: null,
+        winner: null,
+        open_card: {},
+        players: [],
+      },
+      status: "idle",
+    },
+    client: {
+      player_id: null,
+      game_id: null,
+      auth_token: null,
+    },
   },
 };
 
@@ -37,15 +40,14 @@ export const getCurrentGame = createAsyncThunk(
 
 export const newGame = createAsyncThunk(
   "game/newGame",
-  async (name, playerName) => await userApi.game.create(name, playerName),
+  async (gameName, playerName) =>
+    await userApi.game.create(gameName, playerName),
 );
 
 export const joinGame = createAsyncThunk(
   "game/joinGame",
-  async (gameId, playerName) => {
-    let player = { name: playerName, is_ai: false };
-    return await userApi.game.newPlayer(gameId, player);
-  },
+  async (gameId, playerName) =>
+    await userApi.game.newPlayer(gameId, { name: playerName, is_ai: false }),
 );
 
 export const addAIPlayer = createAsyncThunk(
@@ -83,6 +85,7 @@ const gameSlice = createSlice({
       state.game = {
         ...state.game,
         pending: {
+          ...state.game.pending,
           status: "loading",
         },
       };
@@ -155,6 +158,7 @@ const gameSlice = createSlice({
         client: {
           player_id: action.payload.players[0].id,
           game_id: action.payload.id,
+          auth_token: action.payload.players[0].auth_token,
         },
       };
     },
@@ -186,8 +190,7 @@ const gameSlice = createSlice({
           status: "finished",
         },
         client: {
-          player_id: action.payload.players[0].id,
-          game_id: action.payload.id,
+          // inspect response for correct stuff
         },
       };
     },
