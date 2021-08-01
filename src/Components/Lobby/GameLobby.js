@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPendingGames } from "../../redux/gameSlice";
 import GameEntry from "./GameEntry";
 import NewGame from "./NewGame";
+import useInterval from "../../useInterval";
 
 const GameLobby = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,8 @@ const GameLobby = () => {
   useEffect(() => {
     handleListGames();
   }, []);
+
+  useInterval(handleListGames, 3000);
 
   const {
     game: {

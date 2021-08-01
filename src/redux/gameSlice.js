@@ -23,6 +23,7 @@ const initialState = {
     client: {
       player_id: null,
       game_id: null,
+      auth_token: null,
     },
   },
 };
@@ -85,6 +86,7 @@ const gameSlice = createSlice({
       state.game = {
         ...state.game,
         pending: {
+          ...state.game.pending,
           status: "loading",
         },
       };
@@ -157,6 +159,7 @@ const gameSlice = createSlice({
         client: {
           player_id: action.payload.players[0].id,
           game_id: action.payload.id,
+          auth_token: action.payload.auth_token,
         },
       };
     },
