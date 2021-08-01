@@ -9,7 +9,8 @@ const GameEntry = (props) => {
   const { game } = props;
   const [showJoin, setShowJoin] = useState(false);
   const [playerName, setPlayerName] = useState("");
-  const handleJoinGame = async (player) => dispatch(joinGame(game.id, player));
+  const handleJoinGame = async (player) =>
+    await dispatch(joinGame(game.id, player));
 
   const {
     game: {

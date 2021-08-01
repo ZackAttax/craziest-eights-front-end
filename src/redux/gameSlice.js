@@ -190,8 +190,7 @@ const gameSlice = createSlice({
           status: "finished",
         },
         client: {
-          player_id: action.payload.players[0].id,
-          game_id: action.payload.id,
+          // inspect response for correct stuff
         },
       };
     },
