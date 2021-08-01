@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Heading } from "evergreen-ui";
+import { Card, Heading, Pane, Dialog, TextInput } from "evergreen-ui";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { joinGame } from "../../redux/gameSlice";
@@ -11,15 +11,45 @@ const GameEntry = (props) => {
   const [playerName, setPlayerName] = useState("");
   const handleJoinGame = async () => dispatch(joinGame(game.id, playerName));
 
-  const sendJoinGame = () => {};
+  const {
+    game: {
+      game: {
+        client: { player_id, game_id, auth_token },
+      },
+    },
+  } = useSelector((state) => state);
+
+  const sendJoinGame = () => {
+    if (playerName !== "") {
+      handleJoinGame().then(() => {
+        localStorage.setItem("playerId", player_id);
+        localStorage.setItem("gameId", game_id);
+        localStorage.setItem("authToken", auth_token);
+      });
+    }
+  };
 
   return (
     <Pane margin={10} padding={5}>
       <Dialog
         isShown={showJoin}
         title={`Join ${game.name}`}
-        oncCloseComplete={() => setShowJoin(false)}
-      ></Dialog>
+        onCloseComplete={() => setShowJoin(false)}
+        onConfirm={sendJoinGame}
+        confirmLabel="Join Game"
+      >
+        <Heading>{game.name}</Heading>
+        <Heading>
+          {game.player_count == 1
+            ? `${game.player_count} Player`
+            : `${game.player_count} Players`}
+        </Heading>
+        <TextInput
+          placeholder="Player Name"
+          onChange={(e) => setPlayerName(e.target.value)}
+          value={playerName}
+        />
+      </Dialog>
       <Card background="tint1" onClick={() => setShowJoin(true)}>
         <Heading>{game.name}</Heading>
         <Heading>

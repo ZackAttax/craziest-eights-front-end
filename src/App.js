@@ -13,14 +13,16 @@ const App = () => {
     handleLoad();
   }, []);
 
+  const storageContents = {
+    playerId: localStorage.getItem("player_id"),
+    gameId: localStorage.getItem("game_id"),
+    authToken: localStorage.getItem("auth_token"),
+  };
+
   const [newVisit, setNewVisit] = useState(false);
 
   const handleLoad = () => {
     // check localStorage for existing game and player ids, use to determine which component to load
-    const storageContents = {
-      playerId: localStorage.getItem("playerId"),
-      gameId: localStorage.getItem("gameId"),
-    };
 
     if (storageContents.playerId && storageContents.gameId) {
       // dispatch get game and get player for relevant ids

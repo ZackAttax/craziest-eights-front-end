@@ -45,10 +45,8 @@ export const newGame = createAsyncThunk(
 
 export const joinGame = createAsyncThunk(
   "game/joinGame",
-  async (gameId, playerName) => {
-    let player = { name: playerName, is_ai: false };
-    return await userApi.game.newPlayer(gameId, player);
-  },
+  async (gameId, playerName) =>
+    await userApi.game.newPlayer(gameId, { name: playerName, is_ai: false }),
 );
 
 export const addAIPlayer = createAsyncThunk(
@@ -159,7 +157,7 @@ const gameSlice = createSlice({
         client: {
           player_id: action.payload.players[0].id,
           game_id: action.payload.id,
-          auth_token: action.payload.auth_token,
+          auth_token: action.payload.players[0].auth_token,
         },
       };
     },
