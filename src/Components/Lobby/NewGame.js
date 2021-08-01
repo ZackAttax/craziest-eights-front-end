@@ -5,15 +5,16 @@ import { newGame } from "../../redux/gameSlice";
 
 const NewGame = () => {
   const dispatch = useDispatch();
-  const handleCreateGame = async (game, player) =>
-    await dispatch(newGame(game, player));
   const [showNewGame, setShowNewGame] = useState(false);
   const [gameName, setGameName] = useState("");
   const [playerName, setPlayerName] = useState("");
 
+  const handleCreateGame = async () =>
+    await dispatch(newGame(gameName, playerName));
+
   const newGameClick = () => {
     if (gameName !== "" && playerName !== "") {
-      handleCreateGame(gameName, playerName);
+      handleCreateGame();
     }
   };
 
