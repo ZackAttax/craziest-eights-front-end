@@ -19,18 +19,13 @@ const GameLobby = () => {
   const {
     game: {
       game: {
-        pending: { games, status },
+        pending: { games },
       },
     },
   } = useSelector((state) => state);
 
-  const showGames = () => {
-    if (status == "finished") {
-      return games.map((game) => {
-        return <GameEntry key={game.id} game={game} />;
-      });
-    }
-  };
+  const showGames = () =>
+    games.map((game) => <GameEntry key={game.id} game={game} />);
 
   return (
     <Pane
