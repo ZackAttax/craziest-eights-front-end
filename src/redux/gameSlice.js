@@ -40,7 +40,8 @@ export const getCurrentGame = createAsyncThunk(
 
 export const newGame = createAsyncThunk(
   "game/newGame",
-  async (name, playerName) => await userApi.game.create(name, playerName),
+  async (gameName, playerName) =>
+    await userApi.game.create(gameName, playerName),
 );
 
 export const joinGame = createAsyncThunk(

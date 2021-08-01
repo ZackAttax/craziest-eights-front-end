@@ -9,7 +9,7 @@ const GameEntry = (props) => {
   const { game } = props;
   const [showJoin, setShowJoin] = useState(false);
   const [playerName, setPlayerName] = useState("");
-  const handleJoinGame = async () => dispatch(joinGame(game.id, playerName));
+  const handleJoinGame = async (player) => dispatch(joinGame(game.id, player));
 
   const {
     game: {
@@ -21,7 +21,8 @@ const GameEntry = (props) => {
 
   const sendJoinGame = () => {
     if (playerName !== "") {
-      handleJoinGame().then(() => {
+      console.log(playerName);
+      handleJoinGame(playerName).then(() => {
         localStorage.setItem("playerId", player_id);
         localStorage.setItem("gameId", game_id);
         localStorage.setItem("authToken", auth_token);
